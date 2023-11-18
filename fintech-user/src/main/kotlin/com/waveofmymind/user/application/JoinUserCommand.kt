@@ -4,7 +4,7 @@ import com.waveofmymind.user.domain.User
 
 data class JoinUserCommand(
     private val name: String,
-    private val email: String,
+    val email: String,
     private val password: String
 ) {
     fun toEntity() = User.from(

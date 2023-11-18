@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull
 class User(
 
     @NotNull
-    private val name: String,
+    val name: String,
 
     @NotNull
-    private val email: String,
+    val email: String,
 
     @NotNull
     private val password: String,
@@ -24,7 +24,7 @@ class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private val id: Long = 0L
+    val id: Long = 0L
 ) {
     companion object {
         fun from(name: String, email: String, password: String) = User(name, email, password)
