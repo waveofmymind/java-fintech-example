@@ -1,5 +1,6 @@
 package com.waveofmymind.user.application
 
+import com.waveofmymind.user.domain.User
 import com.waveofmymind.user.domain.UserJpaRepository
 import com.waveofmymind.user.presentation.UserResponse
 import org.springframework.data.repository.findByIdOrNull
@@ -15,5 +16,9 @@ class UserReader(
     fun getUser(id: Long): UserResponse {
         val user = userRepository.findByIdOrNull(id) ?: throw IllegalArgumentException("유저를 찾지 못했습니다.")
         return UserResponse.from(user.id, user.name, user.email)
+    }
+
+    fun getUserByEmail(email: String): User? {
+        return userRepository.findByEmail(email)
     }
 }
