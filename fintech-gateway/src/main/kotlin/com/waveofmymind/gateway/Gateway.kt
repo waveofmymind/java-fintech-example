@@ -1,11 +1,11 @@
-package com.waveofmymind.fintech
+package com.waveofmymind.gateway
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class FintechApplication
+class Gateway
 
 fun main(args: Array<String>) {
-    runApplication<FintechApplication>(*args)
+    runApplication<Gateway>(*args)
 }
