@@ -11,6 +11,10 @@ extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+
+    developmentOnly("io.netty:netty-resolver-dns-native-macos:4.1.75.Final") {
+        artifact { classifier = "osx-aarch_64" }
+    }
 }
 
 dependencyManagement {
