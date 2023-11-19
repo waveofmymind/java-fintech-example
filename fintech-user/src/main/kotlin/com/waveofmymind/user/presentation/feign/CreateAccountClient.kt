@@ -11,5 +11,5 @@ interface CreateAccountClient {
     fun createAccount(
         @RequestBody
         request: CreateAccountRequest
-    )
+    ): String
 }
