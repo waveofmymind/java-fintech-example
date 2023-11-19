@@ -1,7 +1,6 @@
 package com.waveofmymind.user.presentation
 
 import com.waveofmymind.user.application.UserService
-import com.waveofmymind.user.presentation.feign.CreateAccountClient
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
