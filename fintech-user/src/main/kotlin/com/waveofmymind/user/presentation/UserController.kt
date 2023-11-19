@@ -1,6 +1,7 @@
 package com.waveofmymind.user.presentation
 
 import com.waveofmymind.user.application.UserService
+import com.waveofmymind.user.presentation.feign.CreateAccountClient
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -25,5 +26,10 @@ class UserController(
     @GetMapping("/{userId}")
     fun getUser(@PathVariable userId: Long): UserResponse {
         return userService.getUser(userId)
+    }
+
+    @PostMapping("/{userId}/accounts")
+    fun account(@PathVariable userId: Long) {
+        userService.createAccount(userId)
     }
 }
