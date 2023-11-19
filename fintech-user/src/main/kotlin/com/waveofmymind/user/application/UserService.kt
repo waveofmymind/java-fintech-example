@@ -26,8 +26,8 @@ class UserService(
     }
 
     @Transactional
-    fun createAccount(userId: Long) {
+    fun createAccount(userId: Long, password: String): String {
         val userResponse = userReader.getUser(userId)
-        accountClient.createAccount(userResponse.toCreateAccountRequest())
+        return accountClient.createAccount(userResponse.toCreateAccountRequest(password))
     }
 }

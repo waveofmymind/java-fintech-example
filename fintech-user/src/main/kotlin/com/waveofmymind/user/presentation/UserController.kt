@@ -28,7 +28,10 @@ class UserController(
     }
 
     @PostMapping("/{userId}/accounts")
-    fun account(@PathVariable userId: Long) {
-        userService.createAccount(userId)
+    fun account(
+        @PathVariable userId: Long,
+        @RequestBody password: String
+    ): String {
+        return userService.createAccount(userId, password)
     }
 }

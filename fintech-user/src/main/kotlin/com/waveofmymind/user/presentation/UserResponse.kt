@@ -7,7 +7,8 @@ data class UserResponse(
     val name: String,
     val email: String
 ) {
-    fun toCreateAccountRequest() = CreateAccountRequest(id, name, email)
+    fun toCreateAccountRequest(password: String) = CreateAccountRequest(id, name, password)
+
     companion object {
         @JvmStatic
         fun from(id: Long, name: String, email: String) = UserResponse(id, name, email)
