@@ -19,6 +19,9 @@ class User(
     val email: String,
 
     @NotNull
+    val phoneNumber: String,
+
+    @NotNull
     private val password: String,
 
     @Id
@@ -27,6 +30,7 @@ class User(
     val id: Long = 0L
 ) {
     companion object {
-        fun from(name: String, email: String, password: String) = User(name, email, password)
+        fun from(name: String, email: String, phoneNumber: String, password: String) =
+            User(name, email, phoneNumber, password)
     }
 }
