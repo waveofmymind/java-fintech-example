@@ -1,7 +1,7 @@
 package com.waveofmymind.user.application
 
 import com.waveofmymind.user.presentation.UserResponse
-import com.waveofmymind.user.presentation.feign.CreateAccountClient
+import com.waveofmymind.user.presentation.feign.AccountClient
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 class UserService(
     private val userReader: UserReader,
     private val userWriter: UserWriter,
-    private val accountClient: CreateAccountClient
+    private val accountClient: AccountClient
 ) {
 
     @Transactional
