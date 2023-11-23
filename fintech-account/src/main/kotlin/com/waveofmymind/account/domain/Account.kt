@@ -8,15 +8,15 @@ import jakarta.persistence.Id
 @Entity
 class Account(
 
-    private val userId: Long,
+     val userId: Long,
 
-    private val name: String,
+     val name: String,
 
-    private val password: String,
+     val password: String,
 
-    private val accountNumber: String,
+     val accountNumber: String,
 
-    private val balance: Long,
+     val balance: Long,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
