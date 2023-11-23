@@ -8,15 +8,17 @@ import jakarta.persistence.Id
 @Entity
 class Account(
 
-     val userId: Long,
+    val userId: Long,
 
-     val name: String,
+    val name: String,
 
-     val password: String,
+    val password: String,
 
-     val accountNumber: String,
+    val accountNumber: String,
 
-     val balance: Long,
+    val activeStatus: ActiveStatus = ActiveStatus.ACTIVE,
+
+    val balance: Long,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ class Account(
     companion object {
         @JvmStatic
         fun of(userId: Long, name: String, password: String, accountNumber: String): Account {
-            return Account(userId, name, password, accountNumber, 0L)
+            return Account(userId, name, password, accountNumber, ActiveStatus.ACTIVE, 0L)
         }
     }
 }
