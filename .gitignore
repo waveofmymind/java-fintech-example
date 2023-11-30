@@ -354,4 +354,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+fintech-user/src/main/kotlin/com/waveofmymind/user/web/out
+fintech-account/src/main/kotlin/com/waveofmymind/account/web/out
+
 # End of https://www.toptal.com/developers/gitignore/api/gradle,kotlin,java,intellij,intellij+all,intellij+iml,macos,windows
