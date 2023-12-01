@@ -1,7 +1,10 @@
 package com.waveofmymind.user.application
 
+import com.waveofmymind.user.global.error.UserNotFoundException
+import com.waveofmymind.user.global.jwt.JwtProvider
+import com.waveofmymind.user.global.jwt.LoginToken
+import com.waveofmymind.user.presentation.LoginUserCommand
 import com.waveofmymind.user.presentation.UserResponse
-import com.waveofmymind.user.presentation.feign.AccountClient
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -9,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 class UserService(
     private val userReader: UserReader,
     private val userWriter: UserWriter,
-    private val accountClient: AccountClient
+    private val jwtProvider: JwtProvider
 ) {
 
     @Transactional
@@ -22,12 +25,14 @@ class UserService(
 
     @Transactional(readOnly = true)
     fun getUser(id: Long): UserResponse {
-        return userReader.getUser(id)
+        val findUser = userReader.getUser(id)
+        return UserResponse.from(findUser.id, findUser.email, findUser.name)
     }
 
-    @Transactional
-    fun createAccount(userId: Long, password: String): String {
-        val userResponse = userReader.getUser(userId)
-        return accountClient.createAccount(userResponse.toCreateAccountRequest(password))
+    @Transactional(readOnly = true)
+    fun loginUser(command: LoginUserCommand): LoginToken {
+        val user = userReader.getUserByEmail(command.email) ?: throw UserNotFoundException()
+        user.checkAuthenticity(command.password)
+        return jwtProvider.generateLoginToken(user)
     }
 }
