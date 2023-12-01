@@ -1,4 +1,4 @@
-package com.waveofmymind.user.config
+package com.waveofmymind.user.global.config
 
 import org.springframework.cloud.openfeign.EnableFeignClients
 import org.springframework.context.annotation.Configuration
