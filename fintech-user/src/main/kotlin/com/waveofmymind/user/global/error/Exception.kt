@@ -1,7 +1,5 @@
 package com.waveofmymind.user.global.error
 
-import com.waveofmymind.account.global.error.ErrorCode
-
 sealed class BusinessException(
     errorCode: ErrorCode
 ) : RuntimeException(errorCode.message)

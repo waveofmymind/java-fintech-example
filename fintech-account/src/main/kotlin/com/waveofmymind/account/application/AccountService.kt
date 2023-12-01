@@ -2,6 +2,7 @@ package com.waveofmymind.account.application
 
 import com.waveofmymind.account.domain.Account
 import com.waveofmymind.account.domain.AccountJpaRepository
+import com.waveofmymind.account.global.error.AccountExistsException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -27,7 +28,7 @@ class AccountService(
 
     fun createAccount(command: CreateAccountCommand): Long {
         accountRepository.findByUserIdAndName(command.userId, command.name)?.let {
-            throw IllegalArgumentException("이미 계좌가 존재합니다.")
+            throw AccountExistsException()
         }
         val account = Account.of(
             command.userId,
@@ -40,5 +41,9 @@ class AccountService(
 
     private fun generateAccountNumber(): String {
         return UUID.randomUUID().toString()
+    }
+
+    companion object {
+        private const val DEPOSIT_ACCOUNT_PREFIX = "100"
     }
 }
