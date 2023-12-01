@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.5" apply false
-    id("io.spring.dependency-management") version "1.1.3" apply false
+    id("org.springframework.boot") version "3.1.6" apply false
+    id("io.spring.dependency-management") version "1.1.4" apply false
     kotlin("jvm") version "1.9.20"
     kotlin("plugin.spring") version "1.9.20" apply false
     kotlin("plugin.jpa") version "1.9.20" apply false
@@ -32,15 +32,15 @@ subprojects {
         mavenCentral()
     }
 
+
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter")
+        implementation("org.springframework.kafka:spring-kafka")
+        testImplementation("org.springframework.kafka:spring-kafka-test")
 
         // kotlin
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
     tasks.withType<KotlinCompile> {
