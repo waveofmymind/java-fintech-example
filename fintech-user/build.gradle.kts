@@ -14,6 +14,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    // token
+    implementation("com.auth0:java-jwt:3.18.3")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("com.nimbusds:nimbus-jose-jwt:9.31")
+
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     runtimeOnly("com.mysql:mysql-connector-j")
