@@ -1,5 +1,6 @@
 package com.waveofmymind.user.domain
 
+import com.waveofmymind.user.web.CreateAccountEvent
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -29,6 +30,9 @@ class User(
     @Column(name = "user_id")
     val id: Long = 0L
 ) {
+    fun checkAuthenticity(password: String): Boolean {
+        return this.password == password
+    }
     companion object {
         fun from(name: String, email: String, phoneNumber: String, password: String) =
             User(name, email, phoneNumber, password)
