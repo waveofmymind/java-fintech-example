@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
@@ -20,9 +21,10 @@ class AccountController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createAccount(
-        @RequestBody request: CreateAccountRequest
+        @RequestBody request: CreateAccountRequest,
+        @RequestHeader(X_AUTHORIZATION_ID) userId: String
     ): String {
-        val accountId = accountService.createAccount(request.toCommand())
+        val accountId = accountService.createAccount(request.toCommand(userId.toLong()))
         return "계좌 생성 완료: $accountId"
     }
 
@@ -31,5 +33,9 @@ class AccountController(
         @PathVariable userId: Long
     ): FindAccountResponse {
         return accountService.getAccount(userId)
+    }
+
+    companion object {
+        private const val X_AUTHORIZATION_ID = "X-Authorization-id"
     }
 }
