@@ -26,24 +26,26 @@ class AccountService(
         )
     }
 
-    fun createAccount(command: CreateAccountCommand): Long {
+    fun createAccount(command: CreateAccountCommand): AccountResponse {
         accountRepository.findByUserIdAndName(command.userId, command.name)?.let {
             throw AccountExistsException()
         }
+        val accountNumber = AccountNumberDeligator.generateAccountNumber(command.phoneNumber)
+
         val account = Account.of(
             command.userId,
             command.name,
             command.password,
-            generateAccountNumber()
+            accountNumber
         )
-        return accountRepository.save(account).id
+        accountRepository.save(account)
+        return AccountResponse(
+            command.name,
+            accountNumber
+        )
     }
 
     private fun generateAccountNumber(): String {
         return UUID.randomUUID().toString()
-    }
-
-    companion object {
-        private const val DEPOSIT_ACCOUNT_PREFIX = "100"
     }
 }
