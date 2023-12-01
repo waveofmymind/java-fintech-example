@@ -13,18 +13,20 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Component
-class JwtAuthenticationGatewayFilter : AbstractGatewayFilterFactory<
+class JwtAuthenticationGatewayFilter(
+    private val jwtVerifier: JwtVerifier
+) : AbstractGatewayFilterFactory<
         JwtAuthenticationGatewayFilter.Config>(Config::class.java) {
 
     data class Config(
-        var secretKey: String
+        val name: String
     )
 
     override fun apply(config: Config): GatewayFilter {
         return GatewayFilter { exchange, chain ->
             val token = exchange.request.headers[HttpHeaders.AUTHORIZATION]?.get(0)?.substring(7)
-            val decodedJwt = JwtVerifier.verify(token!!, config.secretKey)
-            addAuthorizationHeader(exchange, decodedJwt.claims["id"].toString())
+            val decodedJwt = jwtVerifier.verify(token!!)
+            addAuthorizationHeader(exchange, decodedJwt.claims["userId"].toString())
             chain.filter(exchange)
         }
     }
